@@ -10,3 +10,5 @@ data/
 .DS_Store
 tmp/
 notebook.zip
+# The original single-file artifact used to build this project; not distributed.
+legacy/

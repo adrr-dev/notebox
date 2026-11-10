@@ -13,9 +13,10 @@ project.
 | Persistence | One SQLite file, owned by the Go server; browser keeps no authoritative copy |
 | Production | `make build` → one Go binary with the frontend embedded |
 
-The original artifact is preserved untouched at
-`legacy/RI3D_Cabang22_Tahap5_PerspectiveOwnership.html` and is the reference for
-feature parity.
+The original artifact (`legacy/RI3D_Cabang22_Tahap5_PerspectiveOwnership.html`) is
+the reference for feature parity. It is intentionally **not distributed** with this
+repository — `legacy/` is ignored by git — so keep it locally only if you want to
+compare behaviour yourself, since documents under `docs/` cite its line numbers.
 
 ## Quick start
 
@@ -65,7 +66,7 @@ frontend/                    React application
   src/features/              editor, view, list, search, data I/O, formula, epistemic
   src/ui/                    modal shell, confirm dialogs, toasts, toolbar, shortcuts
 docs/                        PRD, architecture, port checklist
-legacy/                      original single-file app (reference only)
+legacy/                      original single-file app (local reference only, git-ignored)
 ```
 
 ## Documentation

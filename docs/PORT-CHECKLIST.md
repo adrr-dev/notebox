@@ -1,6 +1,6 @@
 # Port checklist — Ruang Informasi 3D
 
-`legacy/RI3D_Cabang22_Tahap5_PerspectiveOwnership.html` is the original artifact: a single-file HTML app (~33k lines, Indonesian UI, CDN three.js/mathjs/KaTeX/d3/Firebase, no build step) that this repository replaces with a Go + Gin + GORM + SQLite backend (`backend/`), a React 19 + Vite + TypeScript + Tailwind + zustand frontend (`frontend/`) and an imperative three.js engine (`frontend/src/three/`).
+`legacy/RI3D_Cabang22_Tahap5_PerspectiveOwnership.html` is the original artifact (not distributed with this repository — `legacy/` is git-ignored; the line references below require a local copy): a single-file HTML app (~33k lines, Indonesian UI, CDN three.js/mathjs/KaTeX/d3/Firebase, no build step) that this repository replaces with a Go + Gin + GORM + SQLite backend (`backend/`), a React 19 + Vite + TypeScript + Tailwind + zustand frontend (`frontend/`) and an imperative three.js engine (`frontend/src/three/`).
 
 This file is the authoritative feature ledger for the rewrite: what the app does, where each feature lived in the legacy file, and whether it exists in the new stack. The port is staged — stage 1 covers the core graph/editor/read surfaces, data I/O, the formula engine and the epistemic schema; later stages cover physics/clusters/containers, the voxel heatmap, the knowledge-workbench UI, themes + trails, guided sessions, the tour designer, the Word/PDF report generator, richer minimap features, wiki-links/backlinks/revisions and the remaining polish layers.
 
@@ -209,4 +209,4 @@ Each bullet names a concrete feature, its legacy line reference and its status. 
 - **Data I/O:** export full JSON and a selection (check that edges pull their endpoints), import the file with `Gabung` and `Ganti` plus placement rules, create/restore/delete a snapshot in the panel.
 - **Formula:** give a node a `mathExpression` referencing a variable defined by a connected node and check the viewer math line, the edge variable chips and the `Variabel global` modal.
 - **Epistemic:** annotate an edge relation with source references, export, re-import and confirm the relation survives with out-of-scope references flagged unresolved.
-- After any stage, `git status` should list only intentionally changed files; `legacy/` must stay untouched.
+- After any stage, `git status` should list only intentionally changed files; `legacy/` is git-ignored and never modified (the artifact stays outside the repository).
