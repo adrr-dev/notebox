@@ -1,0 +1,247 @@
+@import 'tailwindcss';
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+
+/*
+ * Base look ported from the legacy single-file app: dark slate space, compact
+ * tool rail, chips and the scrollable overlay surfaces.
+ */
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background-color: #0f172a;
+  color: #f8fafc;
+  font-family: 'Inter', sans-serif;
+  touch-action: auto;
+}
+
+/* The 3D canvas owns orbit/drag gestures. */
+.canvas-container {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  touch-action: none;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* Scroll feedback: a soft ring on the surface the pointer is scrolling. */
+.ri3d-scroll-active {
+  box-shadow: inset 0 0 0 1px rgb(59 130 246 / 0.35);
+}
+
+[contenteditable]:focus {
+  outline: none;
+}
+
+/* --- Labels and relation chips ------------------------------------------- */
+
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: #3b82f640;
+  border: 1px solid #3b82f6;
+  color: #93c5fd;
+}
+
+.var-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+  white-space: nowrap;
+}
+.var-chip-def {
+  background: #10b98130;
+  border: 1px solid #10b981;
+  color: #6ee7b7;
+}
+.var-chip-dep {
+  background: #f59e0b30;
+  border: 1px solid #f59e0b;
+  color: #fcd34d;
+}
+.var-chip-err {
+  background: #ef444430;
+  border: 1px solid #ef4444;
+  color: #fca5a5;
+}
+
+/* --- Tool rail ----------------------------------------------------------- */
+
+.tool-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 0.75rem;
+  border: 1px solid rgb(51 65 85 / 0.7);
+  background: rgb(15 23 42 / 0.85);
+  color: #cbd5e1;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+}
+.tool-btn:hover {
+  background: rgb(30 41 59 / 0.95);
+  color: #fff;
+}
+.tool-btn.active {
+  background: rgb(37 99 235 / 0.9);
+  border-color: rgb(96 165 250 / 0.9);
+  color: #fff;
+}
+
+/* --- Panels and modals --------------------------------------------------- */
+
+.panel-surface {
+  background: rgb(15 23 42 / 0.92);
+  border: 1px solid rgb(51 65 85 / 0.8);
+  border-radius: 0.9rem;
+  backdrop-filter: blur(6px);
+}
+
+/* --- 3D selection frame overlay (projected by the engine) ---------------- */
+
+.ri3d-selection-focus {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  display: none;
+}
+.ri3d-selection-focus.is-visible {
+  display: block;
+}
+.ri3d-selection-corner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #38bdf8;
+}
+.ri3d-selection-corner.tl {
+  top: 0;
+  left: 0;
+  border-right: 0;
+  border-bottom: 0;
+}
+.ri3d-selection-corner.tr {
+  top: 0;
+  right: 0;
+  border-left: 0;
+  border-bottom: 0;
+}
+.ri3d-selection-corner.br {
+  right: 0;
+  bottom: 0;
+  border-left: 0;
+  border-top: 0;
+}
+.ri3d-selection-corner.bl {
+  bottom: 0;
+  left: 0;
+  border-right: 0;
+  border-top: 0;
+}
+
+/* --- Rich description rendering ------------------------------------------ */
+
+.ri3d-rich-scope {
+  --ri3d-desc-paragraph-gap: 12px;
+  --ri3d-desc-paragraph-indent: 0;
+  overflow-wrap: anywhere;
+}
+.ri3d-rich-scope p {
+  margin: 0 0 var(--ri3d-desc-paragraph-gap);
+  text-indent: var(--ri3d-desc-paragraph-indent);
+}
+.ri3d-rich-scope p:last-child {
+  margin-bottom: 0;
+}
+.ri3d-rich-scope a {
+  color: #7dd3fc;
+  text-decoration: underline;
+}
+.ri3d-rich-scope a.wl {
+  color: #c4b5fd;
+  text-decoration: none;
+  border-bottom: 1px dashed #8b5cf6;
+}
+.ri3d-rich-scope blockquote {
+  margin: 0.5rem 0;
+  padding: 0.5rem 0.75rem;
+  border-left: 3px solid #6366f1;
+  background: rgb(49 46 129 / 0.25);
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+.ri3d-rich-scope code {
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+  background: rgb(30 41 59 / 0.9);
+  padding: 0.1em 0.35em;
+  border-radius: 0.3rem;
+}
+.ri3d-rich-scope table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.ri3d-rich-scope th,
+.ri3d-rich-scope td {
+  border: 1px solid #475569;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.85rem;
+}
+.ri3d-rich-scope img {
+  max-width: 100%;
+  border-radius: 0.5rem;
+}
+
+/* Highlight used when search lands on a term. */
+mark.ri3d-hit {
+  background: #fbbf24;
+  color: #111827;
+  border-radius: 0.2rem;
+  padding: 0 0.15rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
