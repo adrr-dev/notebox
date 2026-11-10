@@ -54,7 +54,7 @@ Each bullet names a concrete feature, its legacy line reference and its status. 
 - [x] Drop-lines to the XZ floor and the X/Y/Z zero planes, hidden within 0.1 units — legacy `updateDropLines` `L12091`; `frontend/src/three/nodeMesh.ts:485-519`.
 - [x] Label sprites with canvas texture cache and the legacy priority ladder (text3d 90, relation 80, flow 60, axis 45) — `frontend/src/three/labelSprite.ts`.
 - [x] Edges: relation-coloured line (dashed for negated/approximate symbols), relation badge sprite, variable-flow chips, 1.6-unit endpoint padding — legacy `getRelationStyle`/`createEdgeMesh` `L12131-12240`; `frontend/src/three/edgeMesh.ts`, `relationStyle.ts`.
-- [x] Relation catalogue (56 math/logic symbols with Indonesian labels) — legacy `L4427-4505`; `frontend/src/features/graph/relationSymbols.data.ts`.
+- [x] Relation catalogue (57 math/logic symbols with Indonesian labels; the `< (Kurang Dari)` entry was restored by hand because the extraction regex cannot capture a label that starts with `<`) — legacy `L4427-4505`; `frontend/src/features/graph/relationSymbols.data.ts`.
 - [x] Interaction modes `pointer|move|connect|delete` with raycast picking on pointer-up (6 px move guard; legacy used 5 px), two-click connect with the `Berhasil terhubung!` toast, delete via the archive/permanent dialog — legacy `L12243-12394`; `frontend/src/three/engine.ts:181-196,472-556`, `frontend/src/ui/DeleteChoiceDialog.tsx`.
 - [x] Move mode via `TransformControls`: drag writes live `posX/Y/Z` into the store — legacy `L6722-6733`; `frontend/src/three/engine.ts:143-169`.
 - [x] Snap-to-grid (1 unit) and auto-arrange (√N grid) — legacy `L11761-11805`; `engine.setSnapEnabled` / `engine.autoArrange` in `frontend/src/three/engine.ts:814-880`.
