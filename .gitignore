@@ -9,3 +9,4 @@ backend/internal/web/dist/
 data/
 .DS_Store
 tmp/
+notebook.zip
